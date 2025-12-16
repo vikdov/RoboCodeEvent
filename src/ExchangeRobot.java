@@ -14,7 +14,7 @@ public class ExchangeRobot extends Robot
 	 */
 	public void run() {
 		// Initialization of the robot should be put here
-
+		double	energyThreshold = 50;
 		// After trying out your robot, try uncommenting the import at the top,
 		// and the next line:
 
@@ -23,10 +23,19 @@ public class ExchangeRobot extends Robot
 		// Robot main loop
 		while(true) {
 			// Replace the next 4 lines with any behavior you would like
+		if 	(getEnergy()<energyThreshold){ // Defensive
+		
 			ahead(100);
 			turnGunRight(360);
 			back(100);
 			turnGunRight(360);
+			}
+		else { // Agressive
+			ahead(100);
+			turnGunRight(360);
+			back(100);
+			turnGunRight(360);	
+		}
 		}
 	}
 
@@ -34,7 +43,11 @@ public class ExchangeRobot extends Robot
 	 * onScannedRobot: What to do when you see another robot
 	 */
 	public void onScannedRobot(ScannedRobotEvent e) {
-		// Replace the next line with any behavior you would like
+		double ennemySpeed=e.getVelocity();
+		double ennemyDistance = e.getDistance();
+		double ennemyHeading = e.getHeading();
+		double ennemyBearing = e.getBearing();
+		turnGunRight(getGunHeading()-(getHeading()-ennemyBearing)); 
 		fire(1);
 	}
 
