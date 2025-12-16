@@ -1,0 +1,69 @@
+package ExchangeRobot;
+import robocode.*;
+//import java.awt.Color;
+
+// API help : https://robocode.sourceforge.io/docs/robocode/robocode/Robot.html
+
+/**
+ * ExchangeRobot - a robot by (your name here)
+ */
+public class ExchangeRobot extends Robot
+{
+	/**
+	 * run: ExchangeRobot's default behavior
+	 */
+	public void run() {
+		// Initialization of the robot should be put here
+		double	energyThreshold = 50;
+		// After trying out your robot, try uncommenting the import at the top,
+		// and the next line:
+
+		// setColors(Color.red,Color.blue,Color.green); // body,gun,radar
+
+		// Robot main loop
+		while(true) {
+			// Replace the next 4 lines with any behavior you would like
+		if 	(getEnergy()<energyThreshold){ // Defensive
+		
+			ahead(100);
+
+			back(100);
+
+			}
+		else { // Agressive
+			ahead(100);
+
+			back(100);
+
+		}
+		}
+	}
+
+	/**
+	 * onScannedRobot: What to do when you see another robot
+	 */
+	public void onScannedRobot(ScannedRobotEvent e) {
+		double ennemySpeed=e.getVelocity();
+		double ennemyDistance = e.getDistance();
+		double ennemyHeading = e.getHeading();
+		double ennemyBearing = e.getBearing();
+		turnGunRight(getGunHeading()-(getHeading()-ennemyBearing)); 
+		fire(1);
+	}
+
+	/**
+	 * onHitByBullet: What to do when you're hit by a bullet
+	 */
+	public void onHitByBullet(HitByBulletEvent e) {
+		// Replace the next line with any behavior you would like
+		back(10);
+	}
+	
+	/**
+	 * onHitWall: What to do when you hit a wall
+	 */
+	public void onHitWall(HitWallEvent e) {
+		// Replace the next line with any behavior you would like
+		back(20);
+	}	
+}
